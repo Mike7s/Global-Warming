@@ -38,7 +38,7 @@ function NavBar() {
             <Link to="/" className="block py-2 px-4 text-lg hover:bg-gray-600">Home</Link>
           </li>
           <li>
-            <Link to="/about" className="block py-2 px-4 text-lg hover:bg-gray-600">Temperature</Link>
+            <Link to="/temperature" className="block py-2 px-4 text-lg hover:bg-gray-600">Temperature</Link>
           </li>
           <li>
             <Link to="/services" className="block py-2 px-4 text-lg hover:bg-gray-600">CO2</Link>

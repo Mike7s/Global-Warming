@@ -19,7 +19,7 @@ function useFetch<T>(url: string) {
       try {
         
         const response: AxiosResponse<ApiResponse<T>> = await axios.get(url);
-        setData(response.data.data); 
+        setData(response.data); 
       } catch (err) {
         const axiosError = err as AxiosError;
         setError(axiosError.message || 'Si è verificato un errore');

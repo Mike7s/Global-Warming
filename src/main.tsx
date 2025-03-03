@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.tsx'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import Temperature from './components/temperature.tsx'
 
 const router = createBrowserRouter([
   {
@@ -10,8 +11,8 @@ const router = createBrowserRouter([
     element: <App />,  
   },
   {
-    path: "CO2",
-    element: <App />,  
+    path: "temperature",
+    element: <Temperature />,  
   },
   {
     path: "Metano",
