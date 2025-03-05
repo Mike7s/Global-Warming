@@ -12,7 +12,7 @@ import {
   Legend,
   TimeScale,
 } from "chart.js";
-import "chartjs-adapter-date-fns"; // Adattatore per le date
+import "chartjs-adapter-date-fns";
 import NavBar from "./navBar";
 
 ChartJS.register(
@@ -87,8 +87,8 @@ const Temperature: React.FC = () => {
         backgroundColor: "rgba(255, 99, 132, 0.5)",
         fill: false,
         tension: 0.5,
-        borderWidth: 1,
-        pointRadius: 3,
+        borderWidth: 3,
+        pointRadius: 0,
       },
       {
         label: "Temperatura Station",
@@ -97,8 +97,8 @@ const Temperature: React.FC = () => {
         backgroundColor: "rgba(53, 162, 235, 0.5)",
         fill: false,
         tension: 0.5,
-        borderWidth: 1,
-        pointRadius: 3,
+        borderWidth: 3,
+        pointRadius: 0,
       },
     ],
   };
