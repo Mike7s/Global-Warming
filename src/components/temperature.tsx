@@ -88,7 +88,7 @@ const Temperature: React.FC = () => {
         fill: false,
         tension: 0.5,
         borderWidth: 3,
-        pointRadius: 0,
+        pointRadius: 5,
       },
       {
         label: "Temperatura Station",
@@ -98,7 +98,7 @@ const Temperature: React.FC = () => {
         fill: false,
         tension: 0.5,
         borderWidth: 3,
-        pointRadius: 0,
+        pointRadius: 5,
       },
     ],
   };

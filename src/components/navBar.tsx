@@ -44,7 +44,7 @@ function NavBar() {
             <Link to="/co2" className="block py-2 px-4 text-lg hover:bg-gray-600">CO2</Link>
           </li>
           <li>
-            <Link to="/contact" className="block py-2 px-4 text-lg hover:bg-gray-600">Metano</Link>
+            <Link to="/methane" className="block py-2 px-4 text-lg hover:bg-gray-600">Methane</Link>
           </li>
           <li>
             <Link to="/contact" className="block py-2 px-4 text-lg hover:bg-gray-600">NO2</Link>
