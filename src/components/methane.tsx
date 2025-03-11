@@ -13,7 +13,6 @@ import {
   TimeScale,
 } from "chart.js";
 import "chartjs-adapter-date-fns";
-import NavBar from "./navBar";
 
 ChartJS.register(
   CategoryScale,
@@ -26,142 +25,107 @@ ChartJS.register(
   TimeScale
 );
 
-interface MethaneApiResponse {
-  methane: {
-    date: string;
-    average: string;
-    trend: string;
-    averageUnc: string;
-    trendUnc: string;
-  }[];
+interface MethaneData {
+  date: string;
+  average: string;
+  trend: string;
 }
 
-// Funzione per estrarre l'anno dalla data decimale "1984.11"
-const parseYear = (date: string) => Math.floor(parseFloat(date));
+interface MethaneApiResponse {
+  methane: MethaneData[];
+}
 
-const Methane = () => {
+function Methane() {
   const { data, loading, error } = useFetch<MethaneApiResponse>(
     "https://global-warming.org/api/methane-api"
   );
 
   const [selectedYear, setSelectedYear] = useState<number>(1984);
-  const [allData, setAllData] = useState<any[]>([]);
-  const [filteredData, setFilteredData] = useState<any[]>([]);
+  const [filteredData, setFilteredData] = useState<MethaneData[]>([]);
 
   useEffect(() => {
     if (data && data.methane) {
-      const methaneData = data.methane.map((entry) => ({
-        x: new Date(parseYear(entry.date), (parseFloat(entry.date) % 1) * 12, 1),
-        y: parseFloat(entry.average),
-        trend: parseFloat(entry.trend),
-        averageUnc: parseFloat(entry.averageUnc),
-        trendUnc: parseFloat(entry.trendUnc),
-      }));
+      const filtered = data.methane.filter((entry) => {
+        const year = parseInt(entry.date.split(".")[0]);
+        return year === selectedYear;
+      });
 
-      setAllData(methaneData);
+      setFilteredData(filtered);
     }
-  }, [data]);
+  }, [data, selectedYear]);
 
-  useEffect(() => {
-    if (allData.length > 0) {
-      const filtered = allData.filter((entry) => entry.x.getFullYear() === selectedYear);
-      setFilteredData(filtered.length > 0 ? filtered : allData);
-    }
-  }, [selectedYear, allData]);
-
-  const handleSliderChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSelectedYear(Number(e.target.value));
-  };
-
-  if (loading) return <p className="text-center">Loading...</p>;
+  if (loading) return <p className="text-center text-xl text-blue-600">Loading...</p>;
   if (error) return <p className="text-center text-red-500">Error: {error}</p>;
-  if (!data || !data.methane) return <p className="text-center">No data</p>;
+
+  if (filteredData.length === 0) {
+    return <p className="text-center text-gray-500">No data for this year{selectedYear}</p>;
+  }
 
   const chartData = {
+    labels: filteredData.map((item) => item.date),
     datasets: [
       {
         label: "Methane Levels (Average)",
-        data: filteredData.map(entry => ({ x: entry.x, y: entry.y })),
-        borderColor: "rgb(75, 192, 192)",
-        backgroundColor: "rgba(75, 192, 192, 0.5)",
-        fill: false,
-        tension: 0.3,
+        data: filteredData.map((item) => parseFloat(item.average)),
+        borderColor: "blue",
+        backgroundColor: "rgba(0, 0, 255, 0.2)",
         borderWidth: 2,
-        pointRadius: 5,
+        fill: false,
       },
       {
         label: "Trend",
-        data: filteredData.map(entry => ({ x: entry.x, y: entry.trend })),
-        borderColor: "rgb(255, 159, 64)",
-        backgroundColor: "rgba(255, 159, 64, 0.5)",
-        fill: false,
-        tension: 0.3,
+        data: filteredData.map((item) => parseFloat(item.trend)),
+        borderColor: "red",
+        backgroundColor: "rgba(255, 0, 0, 0.2)",
         borderWidth: 2,
-        pointRadius: 5,
-      }
+        fill: false,
+      },
     ],
   };
 
   const options = {
     responsive: true,
-    maintainAspectRatio: false,
     plugins: {
-      legend: { position: "top" as const },
-      title: {
-        display: true,
-        text: `Methane Levels in ${selectedYear}`,
-        font: { size: 18 },
-      },
+      legend: { display: true },
+      title: { display: true, text: `Methane Levels in ${selectedYear}` },
     },
     scales: {
       x: {
-        type: "time" as const,
-        time: {
-          unit: "month",
-          tooltipFormat: "MMM yyyy",
-          displayFormats: { month: "MMM yyyy" },
-        },
+        type: "category",
         title: {
           display: true,
-          text: "Date",
+          text: "Month",
         },
-        grid: { color: "rgba(75, 192, 192, 0.5)" },
       },
       y: {
-        title: { display: true, text: "Methane Concentration (ppb)" },
-        grid: { color: "rgba(0, 0, 0, 0.1)" },
+        title: {
+          display: true,
+          text: "concentration of methane (ppb)",
+        },
       },
     },
   };
 
   return (
-    <>
-      <NavBar />
-      <div className="flex flex-col items-center">
-        <h2 className="text-2xl font-bold">Methane Levels Over Time</h2>
-
-        <div className="mb-4 flex flex-col justify-center items-center">
-          <label htmlFor="yearSlider" className="mb-2 text-lg">
-            Year: {selectedYear}
-          </label>
-          <input
-            id="yearSlider"
-            type="range"
-            min={1984}
-            max={2024}
-            step={1}
-            value={selectedYear}
-            onChange={handleSliderChange}
-            className="w-64"
-          />
-        </div>
-
-        <div className="w-8/12 aspect-video">
-          <Line data={chartData} options={options} />
-        </div>
+    <div className="flex flex-col items-center p-6 bg-white rounded-lg shadow-lg w-full max-w-3xl mx-auto mt-16">
+      <h2 className="text-2xl font-bold text-center mb-4">Methane Levels Over Time</h2>
+      <div className="w-full flex flex-col items-center mb-4">
+        <label className="font-semibold text-lg mb-2">Select year: {selectedYear}</label>
+        <input
+          type="range"
+          className="w-full accent-blue-600"
+          value={selectedYear}
+          min={1984}
+          max={2024}
+          onChange={(e) => setSelectedYear(Number(e.target.value))}
+        />
       </div>
-    </>
+
+      <div className="w-full">
+        <Line data={chartData} options={options} />
+      </div>
+    </div>
   );
-};
+}
 
 export default Methane;
