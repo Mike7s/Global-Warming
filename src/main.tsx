@@ -7,6 +7,8 @@ import Temperature from './components/temperature.tsx'
 import Co2 from './components/co2.tsx'
 import Methane from './components/methane.tsx'
 import Nitrous from './components/nitrous.tsx'
+import ArcticIceExtent from './components/arctic.tsx'
+import Arctic from './components/arctic.tsx'
 
 const router = createBrowserRouter([
   {
@@ -28,6 +30,10 @@ const router = createBrowserRouter([
   {
     path: "nitrous",
     element: <Nitrous/>,  
+  },
+  {
+    path: "artic",
+    element: <Arctic/>,  
   },
 ]);
 
