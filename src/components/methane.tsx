@@ -111,9 +111,9 @@ function Methane() {
     <>
 <NavBar/>
     <div className="flex flex-col items-center p-6 bg-white rounded-lg shadow-lg w-full max-w-3xl mx-auto mt-16">
-      <h2 className="text-2xl font-bold text-center mb-4">Methane Levels Over Time</h2>
+      <h2 className="text-2xl font-bold text-center mb-4 text-black">Methane Levels Over Time</h2>
       <div className="w-full flex flex-col items-center mb-4">
-        <label className="font-semibold text-lg mb-2">Select year: {selectedYear}</label>
+        <label className="font-semibold text-lg mb-2 text-black">Select year: {selectedYear}</label>
         <input
           type="range"
           className="w-full accent-blue-600"
