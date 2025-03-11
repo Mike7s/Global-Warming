@@ -13,7 +13,7 @@ function NavBar() {
     <nav className=" text-white fixed w-full top-0 left-0 z-50">
       <div className="container mx-auto flex justify-between items-center p-4">
         
-        <h1 className="text-2xl font-bold">GlobalWarming</h1>
+        <h1 className="text-2xl font-bold text-black">GlobalWarming</h1>
 
        
         <button onClick={toggleMenu} className="text-white">
