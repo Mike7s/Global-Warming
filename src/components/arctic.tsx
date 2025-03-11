@@ -44,7 +44,7 @@ interface ApiResponse {
   };
 }
 
-function ArcticIceExtent() {
+function Arctic() {
   const [selectedYear, setSelectedYear] = useState<number>(2004);
   const [filteredData, setFilteredData] = useState<ArcticData[]>([]);
 
@@ -186,4 +186,4 @@ function ArcticIceExtent() {
   );
 }
 
-export default ArcticIceExtent;
+export default Arctic;
