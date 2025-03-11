@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import useFetch from "../hooks/useFetch";
-import NavBar from "./navBar";
 import { Line } from "react-chartjs-2";
 import {
   Chart as ChartJS,
@@ -14,6 +13,7 @@ import {
   TimeScale,
 } from "chart.js";
 import "chartjs-adapter-date-fns";
+import NavBar from "./navBar";
 
 ChartJS.register(
   CategoryScale,
@@ -32,6 +32,7 @@ interface Co2Data {
   day: string;
   cycle: string;
   trend: string;
+  date?: Date;
 }
 
 interface ApiResponse {
@@ -54,9 +55,14 @@ function Co2() {
 
   useEffect(() => {
     if (data && data.co2) {
-      const filteredData = data.co2.filter(
-        (entry) => parseInt(entry.year, 10) === selectedYear
-      );
+      const filteredData = data.co2
+        .map((entry) => ({
+          ...entry,
+          date: parseCo2Time(entry.year, entry.month, entry.day),
+        }))
+        .filter((entry) => entry.date.getFullYear() === selectedYear)
+        .sort((a, b) => a.date.getTime() - b.date.getTime());
+
       setFilteredCo2Data(filteredData);
     }
   }, [selectedYear, data]);
@@ -70,28 +76,28 @@ function Co2() {
       {
         label: "Cycle",
         data: filteredCo2Data.map((entry) => ({
-          x: parseCo2Time(entry.year, entry.month, entry.day),
+          x: entry.date,
           y: parseFloat(entry.cycle),
         })),
         borderColor: "rgb(255, 99, 132)",
         backgroundColor: "rgba(255, 99, 132, 0.5)",
         fill: false,
-        tension: 0.5,
-        borderWidth: 1,
-        pointRadius: 1,
+        tension: 0.4,
+        borderWidth: 2,
+        pointRadius: 3,
       },
       {
         label: "Trend",
         data: filteredCo2Data.map((entry) => ({
-          x: parseCo2Time(entry.year, entry.month, entry.day),
+          x: entry.date,
           y: parseFloat(entry.trend),
         })),
         borderColor: "rgb(53, 162, 235)",
         backgroundColor: "rgba(53, 162, 235, 0.5)",
         fill: false,
-        tension: 0.5,
-        borderWidth: 1,
-        pointRadius: 1,
+        tension: 0.4,
+        borderWidth: 2,
+        pointRadius: 3,
       },
     ],
   };
@@ -101,11 +107,11 @@ function Co2() {
     maintainAspectRatio: false,
     plugins: {
       legend: {
-        position: "top" as const,
+        position: "top",
       },
       title: {
         display: true,
-        text: "CO2 Cycle and Trend Over Time",
+        text: `CO2 Levels - ${selectedYear}`,
         font: {
           size: 18,
         },
@@ -113,7 +119,7 @@ function Co2() {
     },
     scales: {
       x: {
-        type: "time" as const,
+        type: "time",
         time: {
           unit: "month",
           tooltipFormat: "MMM yyyy",
@@ -123,10 +129,7 @@ function Co2() {
         },
         title: {
           display: true,
-          text: "Year",
-        },
-        grid: {
-          color: "rgba(53, 162, 235, 0.5)",
+          text: "Time",
         },
       },
       y: {
@@ -134,8 +137,6 @@ function Co2() {
           display: true,
           text: "CO2 (ppm)",
         },
-        min: 380,
-        max: 420,
         grid: {
           color: "rgba(0, 0, 0, 0.1)",
         },
@@ -149,12 +150,12 @@ function Co2() {
 
   return (
     <>
-      <NavBar />
-      <div className="flex justify-center items-center flex-col">
-        <h2 className="text-2xl font-bold">CO2 Levels Over Time</h2>
+      <NavBar/>
+      <div className="flex justify-center items-center flex-col bg-white rounded-lg shadow-lg p-6 w-full max-w-3xl mx-auto mt-16">
+        <h2 className="text-2xl font-bold text-gray-700">CO2 Levels Over Time</h2>
 
-        <div className="mb-4 flex flex-col justify-center items-center">
-          <label htmlFor="yearSlider" className="mb-2 text-lg">
+        <div className="mb-4 flex flex-col justify-center items-center w-full">
+          <label htmlFor="yearSlider" className="mb-2 text-lg text-gray-600">
             Year: {selectedYear}
           </label>
           <input
@@ -165,11 +166,11 @@ function Co2() {
             step={1}
             value={selectedYear}
             onChange={handleSliderChange}
-            className="w-64"
+            className="w-full accent-blue-600"
           />
         </div>
 
-        <div className="w-8/12 aspect-video">
+        <div className="w-full h-[400px]">
           <Line data={chartData} options={chartOptions} />
         </div>
       </div>
