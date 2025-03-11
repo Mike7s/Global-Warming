@@ -129,7 +129,7 @@ function Nitrous() {
   return (
     <>
       <NavBar />
-      <div className="flex flex-col items-center p-6 bg-white rounded-lg shadow-lg w-full max-w-3xl mx-auto">
+      <div className="flex flex-col items-center p-6 bg-white rounded-lg shadow-lg w-full max-w-3xl mx-auto m-16">
         <h2 className="text-2xl font-bold text-center mb-4 text-gray-700">
           Nitrous Oxide Levels
         </h2>
