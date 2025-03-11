@@ -6,6 +6,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import Temperature from './components/temperature.tsx'
 import Co2 from './components/co2.tsx'
 import Methane from './components/methane.tsx'
+import Nitrous from './components/nitrous.tsx'
 
 const router = createBrowserRouter([
   {
@@ -17,16 +18,16 @@ const router = createBrowserRouter([
     element: <Temperature />,  
   },
   {
-    path: "Co2",
+    path: "co2",
     element: <Co2/>,  
   },
   {
     path: "methane",
-    element: <Methane />,  
+    element: <Methane/>,  
   },
   {
-    path: "Artic",
-    element: <App />,  
+    path: "nitrous",
+    element: <Nitrous/>,  
   },
 ]);
 

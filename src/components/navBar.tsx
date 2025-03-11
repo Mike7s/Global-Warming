@@ -47,10 +47,10 @@ function NavBar() {
             <Link to="/methane" className="block py-2 px-4 text-lg hover:bg-gray-600">Methane</Link>
           </li>
           <li>
-            <Link to="/contact" className="block py-2 px-4 text-lg hover:bg-gray-600">NO2</Link>
+            <Link to="/nitrous" className="block py-2 px-4 text-lg hover:bg-gray-600">NO2</Link>
           </li>
           <li>
-            <Link to="/contact" className="block py-2 px-4 text-lg hover:bg-gray-600">Artic</Link>
+            <Link to="/artic" className="block py-2 px-4 text-lg hover:bg-gray-600">Artic</Link>
           </li>
         </ul>
       </div>
