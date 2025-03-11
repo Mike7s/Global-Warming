@@ -94,9 +94,13 @@ const Temperature: React.FC = () => {
         borderColor: "rgb(53, 162, 235)",
         backgroundColor: "rgba(53, 162, 235, 0.5)",
         fill: false,
+        feature/temperature
         tension: 0.4,
         borderWidth: 2,
         pointRadius: 4,
+        tension: 0.5,
+        borderWidth: 3,
+        pointRadius: 5,
       },
     ],
   };
