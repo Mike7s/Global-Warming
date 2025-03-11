@@ -13,6 +13,7 @@ import {
   TimeScale,
 } from "chart.js";
 import "chartjs-adapter-date-fns";
+import NavBar from "./navBar";
 
 ChartJS.register(
   CategoryScale,
@@ -107,6 +108,8 @@ function Methane() {
   };
 
   return (
+    <>
+<NavBar/>
     <div className="flex flex-col items-center p-6 bg-white rounded-lg shadow-lg w-full max-w-3xl mx-auto mt-16">
       <h2 className="text-2xl font-bold text-center mb-4">Methane Levels Over Time</h2>
       <div className="w-full flex flex-col items-center mb-4">
@@ -118,14 +121,16 @@ function Methane() {
           min={1984}
           max={2024}
           onChange={(e) => setSelectedYear(Number(e.target.value))}
-        />
+          />
       </div>
 
       <div className="w-full">
         <Line data={chartData} options={options} />
       </div>
     </div>
+    </>
   );
+    
 }
 
 export default Methane;
