@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import useFetch from "../hooks/useFetch";
 import { Line } from "react-chartjs-2";
 import {
@@ -41,7 +41,7 @@ function Methane() {
     "https://global-warming.org/api/methane-api"
   );
 
-  const [selectedYear, setSelectedYear] = useState<number>(1984);
+  const [selectedYear, setSelectedYear] = useState<number>(1989);
   const [filteredData, setFilteredData] = useState<MethaneData[]>([]);
 
   useEffect(() => {
