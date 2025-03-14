@@ -106,12 +106,12 @@ const Temperature: React.FC = () => {
     responsive: true,
     maintainAspectRatio: false,
     plugins: {
-      legend: { display: true , position: "top" },
+      legend: { display: true , position: "top" as const  },
       title: { display: true, text: `Global Temperature Trends - ${selectedYear}`, font: { size: 18 } },
     },
     scales: {
       x: {
-        type: "time",
+        type: "time" as const ,
         time: {
           unit: "month",
           tooltipFormat: "MMM yyyy",

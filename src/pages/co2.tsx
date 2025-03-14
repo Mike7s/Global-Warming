@@ -108,7 +108,7 @@ function Co2() {
     maintainAspectRatio: false,
     plugins: {
       legend: {
-        position: "top",
+        position: "top" as const ,
       },
       title: {
         display: true,
@@ -120,7 +120,7 @@ function Co2() {
     },
     scales: {
       x: {
-        type: "time",
+        type: "time" as const ,
         time: {
           unit: "month",
           tooltipFormat: "MMM yyyy",

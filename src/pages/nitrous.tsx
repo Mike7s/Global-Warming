@@ -104,7 +104,7 @@ function Nitrous() {
   const options = {
     responsive: true,
     plugins: {
-      legend: { display: true },
+      legend: { display: true, position:"top" as const },
       title: {
         display: true,
         text: `Dati del Protossido di Azoto per ${selectedYear}`,
@@ -112,7 +112,7 @@ function Nitrous() {
     },
     scales: {
       x: {
-        type: "category",
+        type: "category" as const,
         title: {
           display: true,
           text: "Mese",

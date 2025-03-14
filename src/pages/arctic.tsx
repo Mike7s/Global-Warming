@@ -136,12 +136,12 @@ function Arctic() {
   const options = {
     responsive: true,
     plugins: {
-      legend: { display: true, position:"top"},
+      legend: { display: true, position:"top" as const },
       title: { display: true, text: `Sea Ice Extent Data for ${selectedYear}` },
     },
     scales: {
       x: {
-        type: "category",
+        type: "category" as const ,
         title: {
           display: true,
           text: "Month",
