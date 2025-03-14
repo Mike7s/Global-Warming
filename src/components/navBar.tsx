@@ -1,11 +1,12 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline"; 
 import { GiWorld } from "react-icons/gi";
 
 
 function NavBar() {
   const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate();
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -15,8 +16,8 @@ function NavBar() {
     <nav className=" text-black fixed w-full  top-0 left-0 z-50 ">
       <div className="container mx-auto flex justify-between items-center p-4">
         
-        <a href="https://global-warming-red.vercel.app/" rel="noopener noreferrer" target="_blank"> <GiWorld  className="h-16 w-16"/>
-        </a>
+        <div onClick={()=> navigate('/')}> <GiWorld  className="h-16 w-16 hover:text-blue-600 cursor-pointer" />
+        </div>
 
        
         <button onClick={toggleMenu} className="text-white hover:scale-110">
