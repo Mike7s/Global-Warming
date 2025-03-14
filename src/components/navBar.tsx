@@ -15,7 +15,7 @@ function NavBar() {
     <nav className=" text-black fixed w-full  top-0 left-0 z-50 ">
       <div className="container mx-auto flex justify-between items-center p-4">
         
-        <a href="" rel="noopener noreferrer" target="_blank"> <GiWorld  className="h-16 w-16"/>
+        <a href="https://global-warming-red.vercel.app/" rel="noopener noreferrer" target="_blank"> <GiWorld  className="h-16 w-16"/>
         </a>
 
        
