@@ -10,13 +10,13 @@ function NavBar() {
   };
 
   return (
-    <nav className=" text-white fixed w-full top-0 left-0 z-50">
+    <nav className=" text-black fixed w-full  top-0 left-0 z-50 ">
       <div className="container mx-auto flex justify-between items-center p-4">
         
-        <h1 className="text-2xl font-bold text-black">GlobalWarming</h1>
+        <h1 className="text-2xl font-bold text-black-500">GlobalWarming</h1>
 
        
-        <button onClick={toggleMenu} className="text-white">
+        <button onClick={toggleMenu} className="text-white hover:scale-110">
           <Bars3Icon className="h-8 w-8" />
         </button>
       </div>

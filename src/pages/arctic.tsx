@@ -13,7 +13,8 @@ import {
   TimeScale,
 } from "chart.js";
 import "chartjs-adapter-date-fns";
-import NavBar from "./navBar";
+import NavBar from "../components/navBar";
+
 
 ChartJS.register(
   CategoryScale,

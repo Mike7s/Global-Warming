@@ -13,7 +13,7 @@ import {
   TimeScale,
 } from "chart.js";
 import "chartjs-adapter-date-fns";
-import NavBar from "./navBar";
+import NavBar from "../components/navBar";
 
 ChartJS.register(
   CategoryScale,
@@ -130,7 +130,7 @@ const Temperature: React.FC = () => {
 
   return (
     <>
-      <NavBar />
+      <NavBar/>
       <div className="flex flex-col items-center p-6 bg-white rounded-lg shadow-lg w-full max-w-3xl mx-auto mt-20">
         <h2 className="text-2xl font-bold text-center mb-4 text-gray-700">
           Global Warming Temperature Trends
@@ -156,6 +156,6 @@ const Temperature: React.FC = () => {
       </div>
     </>
   );
-};
+}
 
 export default Temperature;

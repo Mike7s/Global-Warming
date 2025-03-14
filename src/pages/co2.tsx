@@ -13,7 +13,7 @@ import {
   TimeScale,
 } from "chart.js";
 import "chartjs-adapter-date-fns";
-import NavBar from "./navBar";
+import NavBar from "../components/navBar"; 
 
 ChartJS.register(
   CategoryScale,
@@ -150,7 +150,7 @@ function Co2() {
 
   return (
     <>
-      <NavBar/>
+      <NavBar />
       <div className="flex justify-center items-center flex-col bg-white rounded-lg shadow-lg p-6 w-full max-w-3xl mx-auto mt-16">
         <h2 className="text-2xl font-bold text-gray-700">CO2 Levels Over Time</h2>
 

@@ -10,7 +10,7 @@ function App() {
     <>
       <NavBar></NavBar>
       <div
-        className="h-screen bg-cover bg-center bg-fixed flex flex-col items-center justify-center text-white"
+        className="h-screen bg-cover bg-center bg-fixed flex flex-col items-center justify-center pt-16 "
         style={{ backgroundImage: "url('/terra.jpeg')" }} 
       >
       <div className='flex flex-col items-center text-black'>

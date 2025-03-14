@@ -3,12 +3,11 @@ import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.tsx'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import Temperature from './components/temperature.tsx'
-import Co2 from './components/co2.tsx'
-import Methane from './components/methane.tsx'
-import Nitrous from './components/nitrous.tsx'
-import ArcticIceExtent from './components/arctic.tsx'
-import Arctic from './components/arctic.tsx'
+import Temperature from './pages/temperature.tsx'
+import Co2 from './pages/co2.tsx'
+import Methane from './pages/methane.tsx'
+import Nitrous from './pages/nitrous.tsx'
+import Arctic from './pages/arctic.tsx'
 
 const router = createBrowserRouter([
   {
