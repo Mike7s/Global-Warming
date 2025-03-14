@@ -136,7 +136,7 @@ function Arctic() {
   const options = {
     responsive: true,
     plugins: {
-      legend: { display: true },
+      legend: { display: true, position:"top"},
       title: { display: true, text: `Sea Ice Extent Data for ${selectedYear}` },
     },
     scales: {

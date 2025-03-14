@@ -106,7 +106,7 @@ const Temperature: React.FC = () => {
     responsive: true,
     maintainAspectRatio: false,
     plugins: {
-      legend: { display: true },
+      legend: { display: true , position: "top" },
       title: { display: true, text: `Global Temperature Trends - ${selectedYear}`, font: { size: 18 } },
     },
     scales: {

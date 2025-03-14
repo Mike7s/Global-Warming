@@ -88,7 +88,7 @@ function Methane() {
   const options = {
     responsive: true,
     plugins: {
-      legend: { display: true },
+      legend: { display: true, position:"top" },
       title: { display: true, text: `Methane Levels in ${selectedYear}` },
     },
     scales: {
