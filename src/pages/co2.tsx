@@ -13,7 +13,7 @@ import {
   TimeScale,
 } from "chart.js";
 import "chartjs-adapter-date-fns";
-import NavBar from "../components/navBar"; 
+import NavBar from "../components/navBar";
 import Footer from "../components/footer";
 
 ChartJS.register(
@@ -42,7 +42,7 @@ interface ApiResponse {
 
 const parseCo2Time = (year: string, month: string, day: string) => {
   const numericYear = parseInt(year, 10);
-  const numericMonth = parseInt(month, 10) - 1;
+  const numericMonth = parseInt(month, 10) - 1; // Month is 0-based in JavaScript
   const numericDay = parseInt(day, 10);
   return new Date(numericYear, numericMonth, numericDay);
 };
@@ -108,7 +108,7 @@ function Co2() {
     maintainAspectRatio: false,
     plugins: {
       legend: {
-        position: "top" as const ,
+        position: "top" as const,  // "as const" to ensure it is a string literal
       },
       title: {
         display: true,
@@ -120,9 +120,9 @@ function Co2() {
     },
     scales: {
       x: {
-        type: "time" as const ,
+        type: "time" as const,  // "as const" to ensure it is a string literal
         time: {
-          unit: "month",
+          unit: "month" as const,  // "as const" to ensure it is a string literal
           tooltipFormat: "MMM yyyy",
           displayFormats: {
             month: "MMM yyyy",
@@ -175,7 +175,7 @@ function Co2() {
           <Line data={chartData} options={chartOptions} />
         </div>
       </div>
-     <Footer/>
+      <Footer />
     </>
   );
 }

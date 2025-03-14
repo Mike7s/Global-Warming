@@ -34,7 +34,7 @@ interface NitrousData {
 }
 
 interface ApiResponse {
-  nitrous: NitrousData[]; 
+  nitrous: NitrousData[];
 }
 
 function Nitrous() {
@@ -45,17 +45,17 @@ function Nitrous() {
     "https://global-warming.org/api/nitrous-oxide-api"
   );
 
-  // 📌 Debug: Controlla la struttura dei dati ricevuti
+  
   useEffect(() => {
     console.log("Dati ricevuti:", data);
   }, [data]);
 
   useEffect(() => {
     if (data && data.nitrous) {
-      console.log("Struttura dati corretta:", data.nitrous.slice(0, 5)); 
+      console.log("Struttura dati corretta:", data.nitrous.slice(0, 5));
 
       const filtered = data.nitrous.filter((entry) => {
-        const match = entry.date.match(/\d{4}/); 
+        const match = entry.date.match(/\d{4}/);
         const year = match ? parseInt(match[0]) : NaN;
         return year === selectedYear;
       });
@@ -84,7 +84,7 @@ function Nitrous() {
     datasets: [
       {
         label: "Average",
-        data: filteredData.map((item) => parseFloat(item.average) || 0), 
+        data: filteredData.map((item) => parseFloat(item.average) || 0),
         borderColor: "blue",
         backgroundColor: "rgba(0, 0, 255, 0.2)",
         borderWidth: 2,
@@ -92,7 +92,7 @@ function Nitrous() {
       },
       {
         label: "Trend",
-        data: filteredData.map((item) => parseFloat(item.trend) || 0), 
+        data: filteredData.map((item) => parseFloat(item.trend) || 0),
         borderColor: "red",
         backgroundColor: "rgba(255, 0, 0, 0.2)",
         borderWidth: 2,
@@ -104,7 +104,7 @@ function Nitrous() {
   const options = {
     responsive: true,
     plugins: {
-      legend: { display: true, position:"top" as const },
+      legend: { display: true, position: "top" as const },  
       title: {
         display: true,
         text: `Dati del Protossido di Azoto per ${selectedYear}`,
@@ -112,7 +112,7 @@ function Nitrous() {
     },
     scales: {
       x: {
-        type: "category" as const,
+        type: "category" as const,  // Usa "as const"
         title: {
           display: true,
           text: "Mese",
@@ -153,7 +153,7 @@ function Nitrous() {
           <Line data={chartData} options={options} />
         </div>
       </div>
-      <Footer/>
+      <Footer />
     </>
   );
 }

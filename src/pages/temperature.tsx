@@ -106,14 +106,14 @@ const Temperature: React.FC = () => {
     responsive: true,
     maintainAspectRatio: false,
     plugins: {
-      legend: { display: true , position: "top" as const  },
+      legend: { display: true, position: "top" as const },
       title: { display: true, text: `Global Temperature Trends - ${selectedYear}`, font: { size: 18 } },
     },
     scales: {
       x: {
-        type: "time" as const ,
+        type: "time" as const,
         time: {
-          unit: "month",
+          unit: "month" as const, 
           tooltipFormat: "MMM yyyy",
           displayFormats: { month: "MMM yyyy" },
         },
@@ -131,7 +131,7 @@ const Temperature: React.FC = () => {
 
   return (
     <>
-      <NavBar/>
+      <NavBar />
       <div className="flex flex-col items-center p-6 bg-white rounded-lg shadow-lg w-full max-w-3xl mx-auto mt-28 mb-4">
         <h2 className="text-2xl font-bold text-center mb-4 text-gray-700">
           Global Warming Temperature Trends
@@ -155,9 +155,9 @@ const Temperature: React.FC = () => {
           <Line data={chartData} options={options} />
         </div>
       </div>
-      <Footer/>
+      <Footer />
     </>
   );
-}
+};
 
 export default Temperature;

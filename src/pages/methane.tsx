@@ -60,7 +60,7 @@ function Methane() {
   if (error) return <p className="text-center text-red-500">Error: {error}</p>;
 
   if (filteredData.length === 0) {
-    return <p className="text-center text-gray-500">No data for this year{selectedYear}</p>;
+    return <p className="text-center text-gray-500">No data for this year {selectedYear}</p>;
   }
 
   const chartData = {
@@ -88,12 +88,12 @@ function Methane() {
   const options = {
     responsive: true,
     plugins: {
-      legend: { display: true, position:"top" as const  },
+      legend: { display: true, position: "top" as const }, 
       title: { display: true, text: `Methane Levels in ${selectedYear}` },
     },
     scales: {
       x: {
-        type: "category" as const,
+        type: "category" as const,  
         title: {
           display: true,
           text: "Month",
@@ -102,7 +102,7 @@ function Methane() {
       y: {
         title: {
           display: true,
-          text: "concentration of methane (ppb)",
+          text: "Concentration of Methane (ppb)",
         },
       },
     },
@@ -110,29 +110,28 @@ function Methane() {
 
   return (
     <>
-<NavBar/>
-    <div className="flex flex-col items-center p-6 bg-white rounded-lg shadow-lg w-full max-w-3xl mx-auto mt-28 mb-4">
-      <h2 className="text-2xl font-bold text-center mb-4 text-black">Methane Levels Over Time</h2>
-      <div className="w-full flex flex-col items-center mb-4">
-        <label className="font-semibold text-lg mb-2 text-black">Select year: {selectedYear}</label>
-        <input
-          type="range"
-          className="w-full accent-blue-600"
-          value={selectedYear}
-          min={1984}
-          max={2024}
-          onChange={(e) => setSelectedYear(Number(e.target.value))}
+      <NavBar />
+      <div className="flex flex-col items-center p-6 bg-white rounded-lg shadow-lg w-full max-w-3xl mx-auto mt-28 mb-4">
+        <h2 className="text-2xl font-bold text-center mb-4 text-black">Methane Levels Over Time</h2>
+        <div className="w-full flex flex-col items-center mb-4">
+          <label className="font-semibold text-lg mb-2 text-black">Select Year: {selectedYear}</label>
+          <input
+            type="range"
+            className="w-full accent-blue-600"
+            value={selectedYear}
+            min={1984}
+            max={2024}
+            onChange={(e) => setSelectedYear(Number(e.target.value))}
           />
-      </div>
+        </div>
 
-      <div className="w-full">
-        <Line data={chartData} options={options} />
+        <div className="w-full">
+          <Line data={chartData} options={options} />
+        </div>
       </div>
-    </div>
-    <Footer/>
+      <Footer />
     </>
   );
-    
 }
 
 export default Methane;
