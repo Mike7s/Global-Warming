@@ -14,6 +14,7 @@ import {
 } from "chart.js";
 import "chartjs-adapter-date-fns";
 import NavBar from "../components/navBar"; 
+import Footer from "../components/footer";
 
 ChartJS.register(
   CategoryScale,
@@ -151,7 +152,7 @@ function Co2() {
   return (
     <>
       <NavBar />
-      <div className="flex justify-center items-center flex-col bg-white rounded-lg shadow-lg p-6 w-full max-w-3xl mx-auto mt-16">
+      <div className="flex justify-center items-center flex-col bg-white rounded-lg shadow-lg p-6 w-full max-w-3xl mx-auto mt-28 mb-4">
         <h2 className="text-2xl font-bold text-gray-700">CO2 Levels Over Time</h2>
 
         <div className="mb-4 flex flex-col justify-center items-center w-full">
@@ -174,6 +175,7 @@ function Co2() {
           <Line data={chartData} options={chartOptions} />
         </div>
       </div>
+     <Footer/>
     </>
   );
 }

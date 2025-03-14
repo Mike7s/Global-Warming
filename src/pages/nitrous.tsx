@@ -14,6 +14,7 @@ import {
 } from "chart.js";
 import "chartjs-adapter-date-fns";
 import NavBar from "../components/navBar";
+import Footer from "../components/footer";
 
 ChartJS.register(
   CategoryScale,
@@ -129,7 +130,7 @@ function Nitrous() {
   return (
     <>
       <NavBar />
-      <div className="flex flex-col items-center p-6 bg-white rounded-lg shadow-lg w-full max-w-3xl mx-auto mt-16">
+      <div className="flex flex-col items-center p-6 bg-white rounded-lg shadow-lg w-full max-w-3xl mx-auto mt-28 mb-4">
         <h2 className="text-2xl font-bold text-center mb-4 text-gray-700">
           Nitrous Oxide Levels
         </h2>
@@ -152,6 +153,7 @@ function Nitrous() {
           <Line data={chartData} options={options} />
         </div>
       </div>
+      <Footer/>
     </>
   );
 }
