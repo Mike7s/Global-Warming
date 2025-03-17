@@ -56,6 +56,16 @@ function Methane() {
     }
   }, [data, selectedYear]);
 
+  const formatDate = (yyyymm: string): string => {
+    const year = yyyymm.substring(0, 4);
+    const month = yyyymm.substring(5, 7);
+    const months = [
+      "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+      "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+    ];
+    return `${months[parseInt(month, 10) - 1]} ${year}`;
+  };
+
   if (loading) return <p className="text-center text-xl text-blue-600">Loading...</p>;
   if (error) return <p className="text-center text-red-500">Error: {error}</p>;
 
@@ -64,7 +74,7 @@ function Methane() {
   }
 
   const chartData = {
-    labels: filteredData.map((item) => item.date),
+    labels: filteredData.map((item) => formatDate(item.date)),
     datasets: [
       {
         label: "Methane Levels (Average)",
@@ -88,15 +98,19 @@ function Methane() {
   const options = {
     responsive: true,
     plugins: {
-      legend: { display: true, position: "top" as const }, 
+      legend: { display: true, position: "top" as const },
       title: { display: true, text: `Methane Levels in ${selectedYear}` },
     },
     scales: {
       x: {
-        type: "category" as const,  
+        type: "category" as const,
         title: {
           display: true,
           text: "Month",
+        },
+        ticks: {
+          maxRotation: 45,  
+          minRotation: 45,
         },
       },
       y: {

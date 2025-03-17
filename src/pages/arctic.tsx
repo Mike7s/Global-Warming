@@ -26,7 +26,7 @@ ChartJS.register(
 );
 
 interface ArcticData {
-  date: string; 
+  date: string;
   value: number;
   anom: number;
   monthlyMean: number;
@@ -114,10 +114,11 @@ function Arctic() {
 
   const options = {
     responsive: true,
+    maintainAspectRatio: false, 
     plugins: {
       legend: {
         display: true,
-        position: "top" as const, 
+        position: "top" as const,
       },
       title: {
         display: true,
@@ -126,16 +127,24 @@ function Arctic() {
     },
     scales: {
       x: {
-        type: "category" as const, 
+        type: "category" as const,
         title: {
           display: true,
           text: "Month",
+        },
+        ticks: {
+          maxRotation: 45,  
+          minRotation: 45,
         },
       },
       y: {
         title: {
           display: true,
           text: "Million km²",
+        },
+        ticks: {
+          beginAtZero: true, 
+          stepSize: 1,  
         },
       },
     },
@@ -163,7 +172,7 @@ function Arctic() {
           />
         </div>
 
-        <div className="w-full">
+        <div className="w-full min-w-[300px] max-w-full h-[300px] sm:h-[400px] lg:h-[500px]">
           <Line data={chartData} options={options} />
         </div>
       </div>

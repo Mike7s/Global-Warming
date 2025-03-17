@@ -10,7 +10,6 @@ import {
   Title,
   Tooltip,
   Legend,
-  TimeScale,
 } from "chart.js";
 import "chartjs-adapter-date-fns";
 import NavBar from "../components/navBar";
@@ -23,8 +22,7 @@ ChartJS.register(
   LineElement,
   Title,
   Tooltip,
-  Legend,
-  TimeScale
+  Legend
 );
 
 interface NitrousData {
@@ -45,15 +43,8 @@ function Nitrous() {
     "https://global-warming.org/api/nitrous-oxide-api"
   );
 
-  
-  useEffect(() => {
-    console.log("Dati ricevuti:", data);
-  }, [data]);
-
   useEffect(() => {
     if (data && data.nitrous) {
-      console.log("Struttura dati corretta:", data.nitrous.slice(0, 5));
-
       const filtered = data.nitrous.filter((entry) => {
         const match = entry.date.match(/\d{4}/);
         const year = match ? parseInt(match[0]) : NaN;
@@ -66,21 +57,24 @@ function Nitrous() {
     }
   }, [data, selectedYear]);
 
-  if (loading)
-    return <p className="text-center text-xl text-blue-600">Caricamento...</p>;
+  const formatDate = (yyyymm: string): string => {
+    const year = yyyymm.substring(0, 4);
+    const month = yyyymm.substring(5, 7);
+    const months = [
+      "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+      "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+    ];
+    return `${months[parseInt(month, 10) - 1]} ${year}`;
+  };
 
-  if (error) return <p className="text-center text-red-500">Errore: {error}</p>;
-
+  if (loading) return <p className="text-center text-xl text-blue-600">Loading...</p>;
+  if (error) return <p className="text-center text-red-500">Error: {error}</p>;
   if (filteredData.length === 0) {
-    return (
-      <p className="text-center text-gray-500">
-        Nessun dato disponibile per l'anno {selectedYear}
-      </p>
-    );
+    return <p className="text-center text-gray-500">No data available for the year {selectedYear}</p>;
   }
 
   const chartData = {
-    labels: filteredData.map((item) => item.date),
+    labels: filteredData.map((item) => formatDate(item.date)),
     datasets: [
       {
         label: "Average",
@@ -103,25 +97,37 @@ function Nitrous() {
 
   const options = {
     responsive: true,
+    maintainAspectRatio: false, 
     plugins: {
-      legend: { display: true, position: "top" as const },  
+      legend: {
+        display: true,
+        position: "top" as const,
+      },
       title: {
         display: true,
-        text: `Dati del Protossido di Azoto per ${selectedYear}`,
+        text: `Nitrous Oxide Levels for ${selectedYear}`,
       },
     },
     scales: {
       x: {
-        type: "category" as const,  // Usa "as const"
+        type: "category" as const,
         title: {
           display: true,
-          text: "Mese",
+          text: "Month",
+        },
+        ticks: {
+          maxRotation: 45, 
+          minRotation: 45,
         },
       },
       y: {
         title: {
           display: true,
-          text: "Valore",
+          text: "Value",
+        },
+        ticks: {
+          beginAtZero: true, 
+          stepSize: 1, 
         },
       },
     },
@@ -137,7 +143,7 @@ function Nitrous() {
 
         <div className="w-full flex flex-col items-center mb-4">
           <label className="font-semibold text-lg mb-2 text-gray-600">
-            Seleziona Anno: {selectedYear}
+            Select Year: {selectedYear}
           </label>
           <input
             type="range"
@@ -149,7 +155,7 @@ function Nitrous() {
           />
         </div>
 
-        <div className="w-full">
+        <div className="w-full min-w-[300px] max-w-full h-[300px] sm:h-[400px] lg:h-[500px]">
           <Line data={chartData} options={options} />
         </div>
       </div>
